@@ -1,0 +1,15 @@
+    def lengthCycle(head):
+        slow = head
+        fast = head
+        while fast and fast.ref:
+            fast = fast.ref.ref
+            slow = slow.ref
+            if slow == fast:
+                # calculate length
+                temp = slow.next
+                length = 0
+                while temp != fast
+                    temp = temp.next
+                    length+=1
+                return length
+        return 0
