@@ -1,0 +1,30 @@
+### Iterative Approach
+
+def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    if not head:
+        return head
+    previous = None
+    present = head
+    next = present.next
+
+    while present:
+        present.next = previous
+        previous = present
+        present = next
+        if next:
+            next = next.next
+    head = previous
+    return head
+    
+### Recursive Approach
+
+def reverseLLRec(self,head):
+    if node == tail:
+        head = tail
+        return
+
+    reverseList(self, node.next)
+
+    tail.next = node
+    tail = node
+    tail.next = None
