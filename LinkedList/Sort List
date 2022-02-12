@@ -1,0 +1,54 @@
+def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        a = []
+        lilist = head
+        new_node = ListNode()
+        start = new_node 
+        while not head or not head.next:
+            return head
+        while lilist:
+            a.append(lilist.val)
+            lilist = lilist.next
+        for j in sorted(a):
+            t = ListNode(j)
+            start.next = t
+            start = start.next
+        return new_node.next 
+
+OR
+
+def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return head
+
+        mid = self.middleNode(head)
+        temp = mid.next
+        mid.next = None
+        mid = temp
+        left = self.sortList(head)
+        mid = self.sortList(mid)
+
+        return self.mergeTwoLists(left, mid)
+     def middleNode(self,head):
+        slow = head
+        fast = head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+     def mergeTwoLists(self, list1, list2):
+        n = ListNode()
+        head = n
+        while list1 and list2:
+            if list1.val < list2.val:
+                n.next = list1
+                list1 = list1.next
+                n= n.next
+            else:
+                n.next = list2
+                list2 = list2.next
+                n = n.next
+        if list1:
+            n.next = list1
+        if list2:
+            n.next = list2
+        return head.next
