@@ -1,0 +1,43 @@
+def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        mid = Solution.middleNode(head)
+        headSecond = Solution.reverseLLIter(mid)
+        # storing it to re-reverse
+        rereverseHead = headSecond
+
+        # compare both halves
+        while head and headSecond:
+            if head.val != headSecond.val:
+                break
+            head = head.next
+            headSecond = headSecond.next
+            
+        # re-reverse second half
+        Solution.reverseLLIter(rereverseHead)
+        
+        # if both head and secondhead is null then entire LL
+        # is traversed and it is palindrome else not
+        return not head or not headSecond
+    
+    def reverseLLIter(head):
+        if not head:
+            return head
+        previous = None
+        present = head
+        next = present.next
+
+        while present:
+            present.next = previous
+            previous = present
+            present = next
+            if next:
+                next = next.next
+        head = previous
+        return head
+        
+    def middleNode(head):
+        slow = head
+        fast = head
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
