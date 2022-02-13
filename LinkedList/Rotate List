@@ -1,0 +1,44 @@
+Description - 
+Given the head of a linked list, rotate the list to the right by k places.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,4,5], k = 2
+Output: [4,5,1,2,3]
+
+
+
+
+
+Code - 
+
+def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+            if k <= 0 or not head or not head.next:
+                return head
+
+            last = head
+            len = 1
+            while last.next:
+                last = last.next
+                len+=1
+
+            last.next = head
+            rot = k % len
+
+            # skip last k nodes
+            skip = len - rot
+
+            # move to new last
+            newLast = head
+            for i in range(skip-1):
+                newLast = newLast.next
+
+            head = newLast.next
+            newLast.next = None
+
+            return head
+
+        
