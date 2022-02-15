@@ -1,0 +1,51 @@
+Link - https://leetcode.com/problems/reverse-nodes-in-k-group
+
+class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if k==1 or not head:
+            return head
+        
+        curr = head
+        prev = None
+
+        while True:
+            last = prev
+            newEnd = curr
+
+            # reverse between left and right
+            next = curr.next
+            if curr:
+                for i in range(k):
+                    curr.next = prev
+                    prev = curr
+                    curr = next
+                    if next:
+                        next = next.next
+
+            if last:
+                last.next = prev
+            else:
+                head = prev
+
+            newEnd.next = curr
+
+            if not curr:
+                break
+
+            # now the newEnd becomed the previous for next part
+            prev = newEnd
+
+        return head
+        
+        
+  Eroor - AttributeError: 'NoneType' object has no attribute 'next'
+    curr.next = prev
+Line 22 in reverseKGroup (Solution.py)
+    ret = Solution().reverseKGroup(param_1, param_2)
+Line 66 in _driver (Solution.py)
+    _driver()
+Line 77 in <module> (Solution.py)
