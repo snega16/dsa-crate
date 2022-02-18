@@ -1,0 +1,8 @@
+def checkSorted(arr, index):
+    if index == len(arr) - 1:
+        return True
+
+    return arr[index] < arr[index+1] and checkSorted(arr, index+1)
+
+arr = [1,3,8,2,7,4]
+print(checkSorted(arr, index=0))
