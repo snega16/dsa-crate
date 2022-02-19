@@ -1,0 +1,33 @@
+https://leetcode.com/problems/split-array-largest-sum/
+
+class Solution:
+    def splitArray(self, arr: List[int], m: int) -> int:
+        start = max(arr) #max element which is minimum value we can have
+        end = 0
+        for i in range(len(arr)):
+            # this will give the sum of all element which is maximum value we can have
+            end += arr[i]
+
+        # we have the range, apply binary search
+        while start < end:
+            # try middle as potential ans
+            mid = (start + end) // 2
+
+            # calculate how many pieces we can divide with this max sum
+            sum = 0
+            pieces = 1
+            for num in arr:
+                if sum + num > mid:
+                    # we cannot add this in sub array, make new one
+                    # so sum of new array will be num
+                    sum = num# one subarray added
+                    pieces += 1
+                else:
+                    # keep adding in the sub array
+                    sum += num
+
+            if pieces > m:
+                start = mid + 1
+            else:
+                end = mid
+        return end
