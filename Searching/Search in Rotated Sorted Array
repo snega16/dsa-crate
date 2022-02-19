@@ -1,0 +1,50 @@
+https://leetcode.com/problems/search-in-rotated-sorted-array/
+
+class Solution:
+    def search(self, arr: List[int], target: int) -> int:
+        pivot = findPivot(arr)
+        # if no pivot is not found, array is not rotates
+        if pivot == -1:
+            # do normal binary search
+            return binary(arr, target, 0, len(arr)-  1)
+
+        # if pivot is found, we have two asc sorted arrays
+        if arr[pivot] == target:
+            return pivot
+
+        if target >= arr[0]:
+            # all elements after pivot are smaller than start
+            return binary(arr, target, 0, pivot - 1)
+        # target < start - all elements b/w s and p-1 will be bigger than target
+        return binary(arr, target, pivot + 1, len(arr) - 1)
+
+def findPivot(arr):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        # case 1 - mid should be smaller than end or Index error
+        if mid < end and arr[mid] > arr[mid + 1]:
+            return mid
+        # case 2 - mid should be greater than start or Index error
+        if mid > start and arr[mid] < arr[mid - 1]:
+            return mid - 1
+        if arr[start] >= arr[mid]:
+            # elements after mid will be smaller, so ignore all after mid
+            end = mid - 1
+        else:
+            # start <= mid
+            # it is possible that more bigger numbers present after mid
+            start = mid + 1
+    return -1
+    
+def binary(arr, target, start, end):
+    while start <= end:
+        mid = (start + end) // 2
+        if target > arr[mid]:
+            start = mid + 1
+        elif target < arr[mid]:
+            end = mid - 1
+        else:
+            return mid
+    return -1
