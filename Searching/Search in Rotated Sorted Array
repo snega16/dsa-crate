@@ -38,6 +38,40 @@ def findPivot(arr):
             start = mid + 1
     return -1
     
+def findPivotwithDuplicates(arr):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+
+        # case 1 - mid should be smaller than end or Index error
+        if mid < end and arr[mid] > arr[mid + 1]:
+            return mid
+
+        # case 2 - mid should be greater than start or Index error
+        if mid > start and arr[mid] < arr[mid - 1]:
+            return mid - 1
+
+        # if elements at start, end and mid are equal, just skip the duplicates
+        if arr[mid] == arr[start] == arr[end]:
+            # skip duplicates
+            # check if start is pivot
+            if arr[start] > arr[start + 1]:
+                return start
+            start += 1
+            # check if end is pivot
+            if arr[end] < arr[end - 1]:
+                return end - 1
+            end -= 1
+        # left side is sorted means find pivot in rhs
+        elif arr[start] < arr[mid] or arr[start] == arr[mid] and arr[mid] > arr[end]:
+            start = mid + 1
+
+        else:
+            # search in first half
+            end = mid - 1
+    return -1
+    
 def binary(arr, target, start, end):
     while start <= end:
         mid = (start + end) // 2
