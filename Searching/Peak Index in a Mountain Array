@@ -1,0 +1,20 @@
+https://leetcode.com/problems/peak-index-in-a-mountain-array/
+
+def findPeak(arr):
+    start = 0
+    end = len(arr) - 1
+    while start < end:
+        mid = (start + end) // 2
+        if arr[mid] > arr[mid+1]:
+            # we are decreasing part of array. This may be the answer
+            # but we should still check in left, so end!=mid-1
+            end = mid
+        else:
+            # asc part of array
+            start = mid + 1
+    # the loop breaks when start and end are equal.
+    # So both start and end will point at peak element
+    return start # or end
+
+arr = [0,1,2,3,4,3,2,0]
+print(findPeak(arr))
