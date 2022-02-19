@@ -1,0 +1,26 @@
+def findinInfinite(arr, target):
+    # find range of chunk
+    # first start with chunk of 2
+    start = 0
+    end = 1
+    # keep doubling until target element greater than end
+    while target > arr[end]:
+        newStart = end + 1
+        # double chunk value
+        # end = previous end + sizeofchunk*2
+        end = end + (end - start + 1) * 2
+        start = newStart
+    return binary(arr, target, start, end)
+def binary(arr, target, start, end):
+    while start <= end:
+        mid = (start + end) // 2
+        if target > arr[mid]:
+            start = mid + 1
+        elif target < arr[mid]:
+            end = mid - 1
+        else:
+            return mid
+    return -1
+
+arr = [3, 5, 7, 9, 10, 90, 100, 130, 140, 160, 170]
+print(findinInfinite(arr, 10))
