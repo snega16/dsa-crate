@@ -1,0 +1,13 @@
+https://leetcode.com/problems/find-smallest-letter-greater-than-target
+
+class Solution:
+    def nextGreatestLetter(self, arr: List[str], target: str) -> str:
+            start = 0
+            end = len(arr) - 1
+            while start <= end:
+                mid = (start + end) // 2
+                if target < arr[mid]:
+                    end = mid -1
+                else:
+                    start = mid + 1
+            return arr[start % len(arr)]
