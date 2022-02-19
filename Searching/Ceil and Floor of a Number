@@ -1,0 +1,39 @@
+# Ceil of number
+# Smallest number greater than equal to target
+def ceil(arr, target):
+    # if target is the greatest element in array
+    if target > arr[len(arr) - 1]:
+        return -1
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if target > arr[mid]:
+            start = mid+1
+        elif target < arr[mid]:
+            end = mid - 1
+        else:
+            return mid
+    return start
+
+arr = [1,2,4,5,7,9,10]
+print(ceil(arr, 8))
+
+# Floor of number
+# Greatest number smaller or equal to target
+
+def floor(arr, target):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if target > arr[mid]:
+            start = mid+1
+        elif target < arr[mid]:
+            end = mid - 1
+        else:
+            return mid
+    return end
+
+arr = [1,2,4,5,7,9,10]
+print(floor(arr, 8))
