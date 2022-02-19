@@ -1,0 +1,53 @@
+https://leetcode.com/problems/find-in-mountain-array/
+
+def findInMountainArray(arr, target):
+    peak = findPeak(arr)
+    # search in first half
+    firstTry = orderAgnosticBS2(arr, target, 0, peak)
+    if firstTry != -1:
+        return firstTry
+    # search in second half
+    return orderAgnosticBS2(arr, target, peak+1, len(arr)-1)
+    
+def findPeak(arr):
+    start = 0
+    end = len(arr) - 1
+    while start < end:
+        mid = (start + end) // 2
+        if arr[mid] > arr[mid+1]:
+            # we are decreasing part of array. This may be the answer
+            # but we should still check in left, so end!=mid-1
+            end = mid
+        else:
+            # asc part of array
+            start = mid + 1
+    # the loop breaks when start and end are equal.
+    # So both start and end will point at peak element
+    return start # or end
+    
+def orderAgnosticBS2(arr, target, start, end):
+    # finding arr is sorted in which order
+    if arr[start] < arr[end]:
+        isAsc = True
+    else:
+        isAsc = False
+
+    while start <= end:
+        mid = (start + end) // 2
+        if arr[mid] == target:
+            return mid
+        if isAsc:
+            if target > arr[mid]:
+                end = mid - 1
+            else:
+                start = mid + 1
+        else:
+            if target > arr[mid]:
+                end = mid - 1
+            else:
+                start = mid + 1
+    return -1
+
+arr = [1,2,3,4,5,3,1]
+print(findInMountainArray(arr, 3))
+    
