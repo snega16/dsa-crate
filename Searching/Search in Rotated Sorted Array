@@ -56,7 +56,7 @@ def findPivotwithDuplicates(arr):
         if arr[mid] == arr[start] == arr[end]:
             # skip duplicates
             # check if start is pivot
-            if arr[start] > arr[start + 1]:
+            if start <  end and arr[start] > arr[start + 1]:
                 return start
             start += 1
             # check if end is pivot
