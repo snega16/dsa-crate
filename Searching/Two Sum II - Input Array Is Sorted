@@ -1,0 +1,17 @@
+://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+
+class Solution:
+    def twoSum(self, n: List[int], target: int) -> List[int]:
+        start = 0
+        end = len(n) - 1 
+        while start < end:
+            sum =  n[start] + n[end] # sum first and last element
+            if sum == target:
+                return [start+1, end+1]
+            if sum <  target:
+                # increment start , so that it points to next larger number
+                start += 1
+            else:
+                # increment pointer , so it points to smaller number
+                end -= 1
+                
