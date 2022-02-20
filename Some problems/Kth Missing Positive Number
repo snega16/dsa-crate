@@ -1,0 +1,13 @@
+https://leetcode.com/problems/kth-missing-positive-number/
+
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        for num in arr:
+            # if all numbers are lesser than k, then
+            #increment k as we want kth largest number
+            if num <= k:
+                k += 1
+            else:
+                break
+        # if every num in the array is traversed, then return the value of k
+        return k
