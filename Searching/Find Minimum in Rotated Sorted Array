@@ -1,0 +1,25 @@
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+
+class Solution:
+    def findMin(self, arr: List[int]) -> int:
+        return arr[findPivot(arr) + 1]
+    
+def findPivot(arr):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        # case 1 - mid should be smaller than end or Index error
+        if mid < end and arr[mid] > arr[mid + 1]:
+            return mid
+        # case 2 - mid should be greater than start or Index error
+        if mid > start and arr[mid] < arr[mid - 1]:
+            return mid - 1
+        if arr[start] >= arr[mid]:
+            # elements after mid will be smaller, so ignore all after mid
+            end = mid - 1
+        else:
+            # start <= mid
+            # it is possible that more bigger numbers present after mid
+            start = mid + 1
+    return -1
