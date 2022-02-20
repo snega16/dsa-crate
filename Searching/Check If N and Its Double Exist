@@ -1,0 +1,31 @@
+https://leetcode.com/problems/check-if-n-and-its-double-exist/
+
+class Solution:
+    def checkIfExist(self, arr: List[int]) -> bool:
+    # sort the arrat
+        arr.sort()
+        if len(arr) == 1:
+            return False
+          # apply binary search to array, like for each element in array search
+          # if i*2 exists, so i*2 is the element to search. then increment count if it exists
+        c = 0
+        for i in arr:
+            if bs(arr, i*2):
+                if i != 0:
+                    return True
+                c += 1
+        return c > 1
+            
+            
+def bs(arr, target):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if target > arr[mid]:
+            start = mid+1
+        elif target < arr[mid]:
+            end = mid - 1
+        else:
+            return True
+    return False
