@@ -1,0 +1,32 @@
+https://leetcode.com/problems/count-of-smaller-numbers-after-self/
+
+class Solution:
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        # add sorted nums in new array
+        isSorted =[]
+        for i in nums:
+            isSorted.append(i)
+        isSorted.sort()
+        ans = []
+        # check each element in nums, is present in which index in isSorted
+        # so the index will be th elements smaller than that number
+        for i in range(len(nums)):
+            index = binarySearch(isSorted, nums[i])
+            ans.append(index)
+            # remove the number from isSorted
+            isSorted.pop(index)
+        return ans
+
+
+def binarySearch(arr, target):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if target > arr[mid]:
+            start = mid + 1
+        else:
+            end = mid - 1
+    if arr[start] == target:
+        return start
+    return mid
