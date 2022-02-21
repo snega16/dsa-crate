@@ -1,0 +1,27 @@
+https://curiouschild.github.io/leetcode/2019/06/21/divide-chocolate.html
+Variation of split array largest sum - here we should maximize the minimum
+
+def choclateShare(arr, m):
+    start = min(arr)
+    end = 0
+    for i in range(len(arr)):
+        end += arr[i]
+    while start <= end:
+        mid = (start + end) // 2
+        # you should have minimum sweetness chunk
+        pieces = 0
+        sum = 0
+        for i in arr:
+            if i + sum >= mid:
+                sum = 0 # adding value in new array
+                pieces += 1
+            else:
+                sum += i
+        if pieces > m:
+            start = mid + 1
+        else:
+            end = mid - 1
+    return end
+
+arr = [1,2,2,1,2,2,1,2,2]
+print(choclateShare(arr, 2))
