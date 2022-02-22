@@ -1,0 +1,18 @@
+def cyclicSort(arr):
+    # array must be in the range of 1 to N
+    # start from very first index
+    i = 0
+    while i < len(arr):
+        # index of element is element - 1
+        correct = arr[i] - 1
+        # check if it is correct index
+        if arr[i] != arr[correct]:
+            # if not swap
+            arr[i], arr[correct] = arr[correct], arr[i]
+        else:
+            # only move i forward when i is in correct index
+            i += 1
+    return arr
+
+arr= [3,5,4,1,2,9,7,6,8]
+print(cyclicSort(arr))
