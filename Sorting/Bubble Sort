@@ -1,0 +1,20 @@
+def bubbleSort(arr):
+    # to check if array is already sorted
+    swapped:bool
+    # run the steps N-1 times
+    for i in range(len(arr)):
+        swapped = False
+        # for each step, max item will come at respective index
+        for j in range(1,len(arr) - i):
+            # swap if item is smaller than previous item
+            if arr[j] < arr[j - 1]:
+                # swap
+                arr[j], arr[j-1] = arr[j-1], arr[j]
+                # only if swap occurs or else False
+                swapped = True
+        # if you did not swap for a particular value of i, it means sarray is already sorted, hence stop
+        if not swapped: break
+arr = [4,2,7,3,1]
+bubblesort(arr)
+print(arr)
+
