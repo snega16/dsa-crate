@@ -1,0 +1,22 @@
+https://leetcode.com/problems/first-missing-positive/
+
+class Solution:
+    def firstMissingPositive(self, arr: List[int]) -> int:
+        i = 0
+        while i < len(arr):
+            correct = arr[i] - 1
+            #ignore numbers less than zero and numbers greater than length of array
+            if arr[i] > 0 and arr[i] <= len(arr) and arr[i] != arr[correct]:
+                arr[i], arr[correct] = arr[correct], arr[i]
+            else:
+                i += 1
+        # search for missing number
+        for i in range(len(arr)):
+            if arr[i] != i + 1:
+                # return missing number
+                return i + 1
+        # so if all numbers from 1 to n is present then n+1 is the missing number
+        return len(arr) + 1
+        
+a = [0,1,2]
+print(firstMissingPositive(a))
