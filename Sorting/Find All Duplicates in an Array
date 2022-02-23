@@ -1,0 +1,21 @@
+https://leetcode.com/problems/find-all-duplicates-in-an-array/
+
+class Solution:
+    def findDuplicates(self, arr: List[int]) -> List[int]:
+        i = 0
+        while i < len(arr):
+            correct = arr[i] - 1
+            if arr[i] != arr[correct]:
+                arr[i], arr[correct] = arr[correct], arr[i]
+            else:
+                i += 1
+        # search for all duplicate numbers
+        b = []
+        for i in range(len(arr)):
+            # if number is not equal to index+1 then that is repeated
+            if arr[i] != i + 1:
+                b.append(arr[i])
+        return b
+        
+a = [4,3,2,7,8,2,3,1]
+print(findDuplicates(a))
