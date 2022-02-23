@@ -1,0 +1,21 @@
+https://leetcode.com/problems/set-mismatch/
+
+class Solution:
+    def findErrorNums(self, arr: List[int]) -> List[int]:
+        i = 0
+        while i < len(arr):
+            correct = arr[i] - 1
+            if arr[i] != arr[correct]:
+                arr[i], arr[correct] = arr[correct], arr[i]
+            else:
+                i += 1
+        # search for duplicates and what is the original
+        b = []
+        for i in range(len(arr)):
+            if arr[i] != i + 1:
+                b.append(arr[i])
+                b.append(i + 1)
+        return b
+        
+a = [1,2,2,4]
+print(findErrorNums(a))
