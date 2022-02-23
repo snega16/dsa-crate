@@ -1,0 +1,38 @@
+https://leetcode.com/problems/find-the-duplicate-number/
+
+class Solution:
+    def findDuplicate(self, arr: List[int]) -> int:
+        i = 0
+        while i < len(arr):
+            # if element in array is not in correct position
+            if arr[i] != i + 1:
+                correct = arr[i] - 1
+                # if element is not in correct position then this statement will run always
+                if arr[i] != arr[correct]:
+                    arr[i], arr[correct] = arr[correct], arr[i]
+                # already element is not in correct position, that why it entered the
+                # if condition, then how come it is correct now, so this is the duplicate element
+                # this number already exists in correct position
+                else:
+                    return arr[i]
+            # move forward when it is in correct position
+            else:
+                 i += 1
+        return -1
+
+OR
+
+class Solution:
+    def findDuplicate(self, arr: List[int]) -> int:
+        i = 0
+        while i < len(arr):
+            correct = arr[i] - 1
+            if arr[i] != arr[correct]:
+                arr[i], arr[correct] = arr[correct], arr[i]
+            else:
+                i += 1
+        # search for duplicate number
+        for i in range(len(arr)):
+            # if number is not equal to index+1 then that is repeated
+            if arr[i] != i + 1:
+                return arr[i]
