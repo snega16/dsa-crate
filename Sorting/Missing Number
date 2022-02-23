@@ -1,0 +1,21 @@
+https://leetcode.com/problems/missing-number/
+
+class Solution:
+    def missingNumber(self, arr: List[int]) -> int:
+        i = 0
+        while i < len(arr):
+            correct = arr[i]
+            if arr[i] < len(arr) and arr[i] != arr[correct]:
+                arr[i], arr[correct] = arr[correct], arr[i]
+            else:
+                i += 1
+        # search for missing number
+        for i in range(len(arr)):
+            # if the element and the index is not same, then the index
+            # is missing number
+            if arr[i] != i:
+                return i
+        # if len(arr) is not present in the array then that is missing
+        # a = [3,0,2,1] N = 4
+        return len(arr)
+                
