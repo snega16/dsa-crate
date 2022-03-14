@@ -1,0 +1,14 @@
+def count(i):
+    c=0
+    for _ in s:
+        if _==i:
+            c+=1
+    return c
+
+s=list(map(int,input().split()))
+sortedint = sorted(s,reverse=True)
+n=[]
+for i in sortedint:
+    if i not in n:
+        n.append(i)
+        print(i,count(i))
