@@ -1,0 +1,26 @@
+m=[]
+r=int(input())
+c=int(input())
+for i in range(r):
+    a=[]
+    for j in range(c):
+        a.append(int(input()))
+    m.append(a)
+
+m2=[]
+r2=int(input())
+c2=int(input())
+for i in range(r2):
+    b=[]
+    for j in range(c2):
+        b.append(int(input()))
+    m2.append(b)
+
+result=[[0,0],[0,0],[0,0]]
+#iterate through rows
+for i in range(r):
+    for j in range(len(m[0])):
+        result[i][j] = m[i][j]+m2[i][j]
+
+for i in result:
+    print(i)
