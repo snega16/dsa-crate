@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+void display(int* a,int size){
+    for(int k=0;k<size;k++){
+        printf("%d",a[k]);
+    }
+}
+int main()
+{
+    int n,f,n1,arr[100],inc=0;
+    scanf("%d", &n1);
+    for(int j=1;j<n1;j++){
+        f=0;
+        if(j==0 || j==1){
+            f=1;
+        }
+        for(int i=2;i<=j/2;i++){
+            if(j%i==0){
+                f=1;
+            }
+        }
+        if(!f){
+           arr[inc++]=j;
+        }
+    }
+    display(arr,inc);
+}
